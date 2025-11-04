@@ -1,39 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+@extends('templates/main',
+    [
+        'titulo'=>"Sistema Aula",
+        'cabecalho' => 'Lista de Alunos',
+        'rota' => 'alunos.create',
+        'relatorio' => 'report.aluno'
+    ]
+)
+@section('conteudo')
 
-    <a href="{{route('alunos.create')}}">Criar Alunos</a>
-    <table style="border: 1px solid black;">
+    <table class="table align-middle caption-top table-striped">
         <thead>
-            <th>NOME</th>
-            <th>TURMA</th>
-            <th>ANO</th>
-            <th>AÇOES</th>
+            <th class="text-secondary">NOME</th>
+            <th class="d-none d-md-table-cell text-secondary">TURMA</th>
+            <th class="d-none d-md-table-cell text-secondary">ANO</th>
+            <th class="text-secondary">AÇÕES</th>
         </thead>
         <tbody>
             @foreach ($alunos as $item)
-            <tr>
-                <td>{{ $item->nome }}</td>
-                <td>{{ $item->curso }}</td>
-                <td>{{ $item->ano }}</td>
-                <td>
-                    <a href="{{route('alunos.edit', $item->id)}}">Alterar</a>
-                    <form action="{{route('alunos.destroy', $item -> id)}}" method="POST">
+                <tr>
+                    <td>{{ $item->nome }}</td>
+                    <td class="d-none d-md-table-cell">{{ $item->curso->nome }}</td>
+                    <td class="d-none d-md-table-cell">{{ $item->ano }}</td>
+                    <td>
+                        <a href="{{ asset('storage/'.$item->foto) }}" target="_blank" class="btn btn-outline-dark">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
+                                <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5"/>
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                            </svg>
+                        </a>
+                        <a href="{{route('alunos.edit', $item->id)}}" class="btn btn-outline-success">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#5cb85c" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                                <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                            </svg>
+                        </a>
+                        <a nohref style="cursor:pointer" onclick="showRemoveModal('{{ $item->id }}', '{{ $item->nome }} - {{ $item->curso->nome }}')" class="btn btn-outline-danger">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#d9534f" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                            </svg>
+                        </a>
+                    </td>
+                    <form action="{{route('alunos.destroy', $item->id)}}" method="POST" id="form_{{$item->id}}">
                         @csrf
                         @method('delete')
-                        <input type="submit", value="remover">
                     </form>
-                    
-                </td>
-            </tr>
+                </tr>
             @endforeach
         </tbody>
     </table>
-</body>
-</html>
+
+@endsection
