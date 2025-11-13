@@ -16,17 +16,17 @@ class AlunoController extends Controller
      */
     public function index()
     {
-        $alunos = Aluno::all();
-        // dd($alunos);
-        return view ('aluno.index', compact('alunos'));
+        $aluno = Aluno::all();
+        // dd($aluno);
+        return view ('aluno.index', compact('aluno'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create() {
-        $cursos = Curso::all();
-        return view('aluno.create', compact('cursos'));
+        $curso = Curso::all();
+        return view('aluno.create', compact('curso'));
         
     }
 
@@ -53,7 +53,7 @@ class AlunoController extends Controller
             }
         }
         
-        return redirect() -> route('alunos.index');
+        return redirect() -> route('aluno.index');
     }
 
     /**
@@ -75,7 +75,7 @@ class AlunoController extends Controller
             return view('aluno.edit', compact(['aluno', 'cursos']));
         }
 
-        return redirect()->route('alunos.index');
+        return redirect()->route('aluno.index');
     }
 
     /**
@@ -99,7 +99,7 @@ class AlunoController extends Controller
             $aluno->save();
         }
     
-        return redirect()->route('alunos.index');
+        return redirect()->route('aluno.index');
     }
         
 
@@ -114,13 +114,13 @@ class AlunoController extends Controller
             $aluno -> delete();
         }
         
-        return redirect() -> route('alunos.index');
+        return redirect() -> route('aluno.index');
     }
 
     public function report() {
-        $alunos = Aluno::with(['curso'])->get();
+        $aluno = Aluno::with(['curso'])->get();
         // Gera um PDF a partir de uma view Blade
-        $pdf = Pdf::loadView('aluno.report', ['alunos' => $alunos]);
+        $pdf = Pdf::loadView('aluno.report', ['aluno' => $aluno]);
         // Exibe o PDF no navegador
         return $pdf->stream('document.pdf');
         // Ou Faz o download do PDF

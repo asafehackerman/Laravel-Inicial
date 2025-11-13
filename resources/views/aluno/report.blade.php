@@ -149,7 +149,7 @@
     <div class="texto-restrito-baixo" style="position: absolute; bottom: 1px;"> DOCUMENTO GERADO PELO SISTEMA AULA </div>
 
     <div class="identification-header">IDENTIFICAÇÃO</div>
-    @foreach($alunos as $aluno)
+    @foreach($aluno as $aluno)
         <table class="info-table identification-section">
             <tbody>
                 <tr>
