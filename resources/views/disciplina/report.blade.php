@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Relatório de Alunos - Sistema Aula </title>
+    <title>Relatório de Cursos - Sistema Aula </title>
     <style>
 
         body {
@@ -149,22 +149,15 @@
     <div class="texto-restrito-baixo" style="position: absolute; bottom: 1px;"> DOCUMENTO GERADO PELO SISTEMA AULA </div>
 
     <div class="identification-header">IDENTIFICAÇÃO</div>
-    @foreach($aluno as $aluno)
+    @foreach($disciplina as $disciplina)
         <table class="info-table identification-section">
             <tbody>
                 <tr>
-                    <td class="photo-cell" >
-                        @if($aluno->foto)
-                            <img src="{{ public_path('storage/' . $aluno->foto) }}" style="width: 120px; height: auto;">
-                        @else
-                            FOTO
-                        @endif
-                    </td>
                     <td>
                         <table class="inner-table">
-                            <tr><td class="label table-label">NOME:</td><td style="width: 305px;">{{ $aluno->nome }}</td></tr>
-                            <tr><td class="label">CURSO:</td><td>{{ $aluno->curso->nome }}</td></tr>
-                            <tr><td class="label">ANO:</td><td>{{ $aluno->ano }}</td></tr>
+                            <tr><td class="label table-label">NOME:</td><td style="width: 305px;">{{ $disciplina->nome }}</td></tr>
+                            <tr><td class="label">DURAÇÃO:</td><td>{{ $disciplina->aulas }}</td></tr>
+                            <tr><td class="label">CURSO:</td><td>{{ $disciplina->curso->nome }}</td></tr>
                         </table>
                     </td>
                 </tr>

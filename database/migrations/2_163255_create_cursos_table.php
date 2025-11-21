@@ -15,8 +15,9 @@ return new class extends Migration
             $table -> id();
             $table -> string('nome');
             $table -> integer('duracao');
-            $table -> softDeletes();
+            
             $table -> timestamps();
+            $table -> softDeletes();
         });
     }
 

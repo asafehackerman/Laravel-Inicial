@@ -5,19 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Aluno extends Model
+class Disciplina extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'disciplinas';
+
     protected $fillable = [
         'nome',
-        'ano',
-        'foto',
+        'aulas',
         'curso_id'
     ];
 
     public function curso()
     {
-        return $this->belongsTo(\App\Models\Curso::class);
+        return $this->belongsTo(Curso::class);
     }
 }

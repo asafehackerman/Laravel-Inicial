@@ -15,13 +15,12 @@ return new class extends Migration
             $table -> id();
             $table -> string('nome');
             $table -> integer('ano');
-            // linhas adicionadas
             $table -> string('foto') -> nullable();
+            
             $table -> unsignedBigInteger('curso_id');
             $table -> foreign('curso_id') -> references('id') -> on('cursos');
-            $table -> softDeletes();
-
             $table -> timestamps();
+            $table -> softDeletes();
         });
     }
 

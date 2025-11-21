@@ -31,12 +31,13 @@
                 </div>
             </div>
         </div>
+        
         <div class="row">
             <div class="col" >
                 <div class="input-group mb-3">
                     <span class="input-group-text bg-secondary text-white">Curso</span>
                     <select name="curso" class="form-select form-control">
-                        @foreach ($cursos as $item)
+                        @foreach ($curso as $item)
                             <option value="{{$item->id}}" @if($item->id == old('curso')) selected="true" @endif>
                                 {{ $item->nome }}
                             </option>
@@ -45,6 +46,7 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col" >
                 <div class="form-floating mb-3">
